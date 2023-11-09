@@ -2,22 +2,45 @@
 #define ll long long
 using namespace std;
 
-int main() {
-    int t;
-    cin >> t;
+bool ord(ll n) {
+    int prevDigit = -1; 
 
-    while (t--) {
-        ll n;
-        cin >> n;
-
-        string s = to_string(n);
-
-        int unique_digits = unordered_set<char>(s.begin(), s.end()).size();
-
-        ll count = 9 * (unique_digits - 1) + (n >= stoll(s.substr(0, 1)));
-
-        cout << count << endl;
+    if (n < 10) {
+        return true;
     }
 
-    return 0;
+    while (n != 0) {
+        ll currentDigit = n % 10;
+        if (prevDigit != -1 && currentDigit != prevDigit) {
+            return false; 
+        }
+        prevDigit = currentDigit;
+        n = n / 10;
+    }
+    return true;
+}
+
+int main()
+{
+    int t;
+    cin>>t;
+
+    while(t--)
+    {
+        ll n;
+        cin>>n;
+
+int ctr =0;
+
+        for(ll i=1;i<=n;i++)
+        {
+            if(ord(i)){
+                ctr++;
+            }
+        }
+
+        cout<<ctr<<endl;
+    }
+
+
 }
